@@ -16,7 +16,7 @@ import java.util.Set;
  **/
 @RestController
 @RequestMapping("/mydb")
-public class DbController {
+public class DBController {
 
 
     @Autowired

@@ -8,7 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by lyre on 2018/12/17
  **/
 @Controller
-@RequestMapping
-
+@RequestMapping("page")
 public class IndexController {
+
+
+
+
+
+
+    @RequestMapping("index")
+    public String  index(){
+
+        return "home";
+    }
+
 }

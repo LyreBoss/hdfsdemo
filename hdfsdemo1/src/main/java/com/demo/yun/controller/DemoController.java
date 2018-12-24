@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ *
  * Created by lyre on 2018/12/17
  */
 
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DemoController {
 
 
+    /**
+     * 页面入口
+     */
     @RequestMapping("/demo")
     private String index() {
-
-
         return "/index";
     }
 }

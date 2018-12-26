@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.yun.mapper.UserPathMapper" >
+  <resultMap id="BaseResultMap" type="com.demo.yun.pojo.UserPath" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="one_path" property="onePath" jdbcType="VARCHAR" />
+    <result column="two_path" property="twoPath" jdbcType="VARCHAR" />
+    <result column="three_path" property="threePath" jdbcType="VARCHAR" />
+    <result column="file_id" property="fileId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, one_path, two_path, three_path, file_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.yun.pojo.UserPathExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user_path
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.demo.yun.pojo.UserPathExample" >
+    delete from t_user_path
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.demo.yun.pojo.UserPath" >
+    insert into t_user_path (id, one_path, two_path, 
+      three_path, file_id)
+    values (#{id,jdbcType=INTEGER}, #{onePath,jdbcType=VARCHAR}, #{twoPath,jdbcType=VARCHAR}, 
+      #{threePath,jdbcType=VARCHAR}, #{fileId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demo.yun.pojo.UserPath" >
+    insert into t_user_path
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="onePath != null" >
+        one_path,
+      </if>
+      <if test="twoPath != null" >
+        two_path,
+      </if>
+      <if test="threePath != null" >
+        three_path,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="onePath != null" >
+        #{onePath,jdbcType=VARCHAR},
+      </if>
+      <if test="twoPath != null" >
+        #{twoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="threePath != null" >
+        #{threePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.demo.yun.pojo.UserPathExample" resultType="java.lang.Integer" >
+    select count(*) from t_user_path
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user_path
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.onePath != null" >
+        one_path = #{record.onePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twoPath != null" >
+        two_path = #{record.twoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threePath != null" >
+        three_path = #{record.threePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user_path
+    set id = #{record.id,jdbcType=INTEGER},
+      one_path = #{record.onePath,jdbcType=VARCHAR},
+      two_path = #{record.twoPath,jdbcType=VARCHAR},
+      three_path = #{record.threePath,jdbcType=VARCHAR},
+      file_id = #{record.fileId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>XMLHttpRequest上传文件</title>
     <script type="text/javascript">
@@ -32,6 +32,19 @@
             document.getElementById("size").innerHTML = fileObj.size
 
 
+        }
+
+        function newFile() {
+            alert("确认新建文件夹吗？");
+
+
+            var table = document.getElementById('t1');
+
+            table.innerHTML = "<input name='txtCompany\" + rowID + \"' id='txtCompany\" + rowID + \"' type='text' class='inputStyle' />";
+            var  NewRow  = table.insertRow;
+            // var NewCell2 = NewRow.insertCell();
+            // table.append('<tr><td>1</td><td>1</td></tr>');
+            // table.append
         }
 
         //上传成功响应
@@ -87,6 +100,10 @@
             time.innerHTML = '，速度：'+speed+units+'，剩余时间：'+resttime+'s';
             if(bspeed==0) time.innerHTML = '上传已取消';
         }
+
+
+
+
     </script>
     <style>
         ul li{
@@ -101,15 +118,31 @@
 <input type="file" id="file" name="myfile" />
 <input type="button" onclick="UpladFile()" value="上传" />
 <input type="button" onclick="cancleUploadFile()" value="取消" />
+<input type="button" onclick="newFile()" size="100" value="新建文件夹" />
 
 <div>
-    <h1>文件列表</h1>
+    <h4>文件列表</h4>
     <checkbox></checkbox>
-    <ul>
-        <li><span>文件名：</span><span id="name"></span></li>
-        <li><span>创建时间：</span><span id='timer'></span></li>
-        <li><span>文件大小：</span><span id="size"></span></li>
-    </ul>
+    <table border="1" width="100%" id="t1">
+        <tr>
+            <th>文件名称:</th>
+            <th>创建时间:</th>
+            <th>文件大小:</th>
+        </tr>
+        <tr >
+
+            <td width="0" style="width: 0px" id = "name">  <input type="text" disabled="disabled" th:value="${test}" /></td>
+            <td width="0" id = "timer" >  <input type="text" disabled="disabled" th:value="${test}" /></td>
+            <td width="0" id = "size">  <input type="text" disabled="disabled" th:value="${test}" /></td>
+        </tr>
+    </table>
+
+
+    <!--<ul>-->
+        <!--<li><span>文件名：</span><span id="name"></span></li>-->
+        <!--<li><span>创建时间：</span><span id='timer'></span></li>-->
+        <!--<li><span>文件大小：</span><span id="size"></span></li>-->
+    <!--</ul>-->
     <!-- <div id=“fileList”></div> -->
 </div>
 

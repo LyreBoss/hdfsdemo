@@ -161,6 +161,7 @@
     </dependencies>
 
     <build>
+        <finalName>demo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -168,5 +169,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

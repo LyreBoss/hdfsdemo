@@ -5,14 +5,14 @@
     <script type="text/javascript">
 
         var xhr;
-        var arr = ["eyroiuq","S奇动物2.HD1280高清中字韩版.mp4",'ThunderExtensionForChrome'];
+        // var arr = ["eyroiuq","S奇动物2.HD1280高清中字韩版.mp4",'ThunderExtensionForChrome'];
         var html;
         function UpladFile() {
             var fileObj = document.getElementById("file").files[0];
             var url =  "/fileUpload";
             var form = new FormData();
             form.append("file", fileObj);
-            console.log(fileObj.name);
+            console.log(fileObj);
 
             xhr = new XMLHttpRequest();
             xhr.open("post", url, true);
@@ -35,15 +35,28 @@
         }
 
         function newFile() {
-            alert("确认新建文件夹吗？");
+            // alert("确认新建文件夹吗？");
 
 
-            var table = document.getElementById('t1');
-
-            table.innerHTML = "<input name='txtCompany\" + rowID + \"' id='txtCompany\" + rowID + \"' type='text' class='inputStyle' />";
-            var  NewRow  = table.insertRow;
-            // var NewCell2 = NewRow.insertCell();
-            // table.append('<tr><td>1</td><td>1</td></tr>');
+            var table = document.getElementById('t2');
+            
+            table.innerHTML = `
+                                <h4>新建文件夹</h4>
+                                <tr>
+                                    <th>文件名称:</th>
+                                    <th>创建时间:</th>
+                                    <th>文件大小:</th>
+                                </tr>
+                                <tr >
+                                    <td width="0" style="width: 0px" id = "name">  <input type="text" disabled="disabled" /></td>
+                                    <td width="0" id = "timer" >  <input type="text" disabled="disabled" /></td>
+                                    <td width="0" id = "size">  <input type="text" disabled="disabled" /></td>
+                                </tr>
+                                `
+                                ;
+            var  NewRow  = table;
+            var table = NewRow.insertCell
+            // table.append('');
             // table.append
         }
 
@@ -106,45 +119,141 @@
 
     </script>
     <style>
+             body{
+            height: 100%;
+            background-color: #f7f7f7;
+        }
         ul li{
             list-style: none;
         }
+        .header{
+            font-size: 20px;
+            color: #000;
+            height: 62px;
+            line-height: 62px;
+            box-shadow: 0 2px 6px 0 rgba(0,0,0,.05);
+            background-color: #fff;
+            text-align: center;
+        }
+        .tip{
+            font-size: 14px;
+            color: #bdbdbd;
+        }
+        .box{
+            width: 80%;
+            height: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            margin-top: 4px;
+            /* border: 1px solid #eee; */
+        }
+        .btn_box{
+            height: 55px;
+            margin-top: 18px;
+        }
+        .up{
+            width: 84px;
+            height: 32px;
+            display: inline-block;
+            position: relative;
+            background-color: #09AAFF;
+            color: #fff;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        
+        img{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            color: #fff;
+            top: 6px;
+            left: 10px;
+        }
+        .text{
+            display: inline-block;
+            position: absolute;
+            top: 8px;   left: 40px;
+        }
+        .new{
+            width: 111px;
+            height: 32px;
+            display: inline-block;
+            position: relative;
+            border: 1px solid #C3EAFF;
+            color: #09AAFF;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+       .calce{
+        width: 84px;
+            height: 32px;
+            display: inline-block;
+            position: relative;
+            border: 1px solid #C3EAFF;
+            color: #09AAFF;
+            font-size: 12px;
+            border-radius: 4px;
+       }
+       .save_box{
+           color: #bdbdbd;
+           font-size: 18px;
+       }
+       table{
+           border: none;
+       }
     </style>
 </head>
 <body>
-<progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
-<span id="percentage"></span><span id="time"></span>
-<br /><br />
-<input type="file" id="file" name="myfile" />
-<input type="button" onclick="UpladFile()" value="上传" />
-<input type="button" onclick="cancleUploadFile()" value="取消" />
-<input type="button" onclick="newFile()" size="100" value="新建文件夹" />
-
-<div>
-    <h4>文件列表</h4>
-    <checkbox></checkbox>
-    <table border="1" width="100%" id="t1">
-        <tr>
-            <th>文件名称:</th>
-            <th>创建时间:</th>
-            <th>文件大小:</th>
-        </tr>
-        <tr >
-
-            <td width="0" style="width: 0px" id = "name">  <input type="text" disabled="disabled" th:value="${test}" /></td>
-            <td width="0" id = "timer" >  <input type="text" disabled="disabled" th:value="${test}" /></td>
-            <td width="0" id = "size">  <input type="text" disabled="disabled" th:value="${test}" /></td>
-        </tr>
-    </table>
-
-
-    <!--<ul>-->
-        <!--<li><span>文件名：</span><span id="name"></span></li>-->
-        <!--<li><span>创建时间：</span><span id='timer'></span></li>-->
-        <!--<li><span>文件大小：</span><span id="size"></span></li>-->
-    <!--</ul>-->
-    <!-- <div id=“fileList”></div> -->
+<div class="header">我的私人网盘<span class="tip">支持上传，下载</span></div>
+<div class="box">
+        <div class="save_box">
+                <span id="percentage"></span><span id="time"></span>
+                <input type="file" id="file" name="myfile" />
+                
+                <span>上传进度：</span>
+                <progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
+        </div>
+  
+        <!-- <input type="button" onclick="UpladFile()" value="上传" />
+        <input type="button" onclick="cancleUploadFile()" value="取消" />
+        <input type="button" onclick="newFile()" size="100" value="新建文件夹" /> -->
+        <div class="btn_box">
+                <div class="up">
+                    <img src="../static/img/up.png" alt=""/>
+                    <div class="text" onclick="UpladFile()">上传</div>               
+                </div>
+                <div class="calce" onclick="cancleUploadFile()" >
+                        <img src="../static/img/new.png" alt=""/>
+                    
+                        <div class="text">取消</div> 
+                </div>
+                <div class="new">
+                        <img src="../static/img/new.png" alt=""/>
+                    <div class="text" onclick="newFile()">新建文件夹</div>                               
+                </div>
+            </div>
+        <div>
+            <h4>文件列表</h4>
+            <checkbox></checkbox>
+            <table border="1" width="100%" id="t1">
+                <tr>
+                    <th>文件名称:</th>
+                    <th>创建时间:</th>
+                    <th>文件大小:</th>
+                </tr>
+                <tr >
+        
+                    <td width="0" style="width: 0px" id = "name">  <input type="text" disabled="disabled" /></td>
+                    <td width="0" id = "timer" >  <input type="text" disabled="disabled" /></td>
+                    <td width="0" id = "size">  <input type="text" disabled="disabled" /></td>
+                </tr>
+            </table>
+            <table border="1" width="100%" id="t2">
+            </table>
+        </div>
 </div>
+
 
 </body>
 </html>
